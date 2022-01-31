@@ -45,11 +45,10 @@
 convertKeyrunObsBMtoMSSPM <- function(speciesMappingDataFrame,observedBMDataFrame,surveySeason,outputFile) {
 
   # Grab the rows for the desired season and data type using the desired survey index data frame
-  seasonData <- subset(observedBMDataFrame, SEASON==surveySeason & variable=='strat.biomass')
+  seasonData <- base::subset(observedBMDataFrame, SEASON==surveySeason & variable=='strat.biomass')
 
   # Grab just the columns needed for MSSPM
-  seasonDataColumns <- as.data.frame(dplyr::select(seasonData, YEAR, SVSPP, value))
-  # Q1. Why do I need the as.data.frame here?
+  seasonDataColumns <- dplyr::select(seasonData, YEAR, SVSPP, value)
 
   # Using the SVSPP-Name lookup data frame, replace the numeric SVSPP values with their modelName values
   seasonDataColumns$SVSPP <- base::with(speciesMappingDataFrame, modelName[match(seasonDataColumns$SVSPP,SVSPP)])
