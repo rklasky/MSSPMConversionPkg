@@ -42,7 +42,7 @@
 convertKeyrunCatchtoMSSPM <- function(inputDataFrame,startYear,outputFile) {
 
   # Get only the catch rows (i.e., no cv) and years >= the startYear
-  simCatchData <- subset(inputDataFrame,year>=startYear & variable=='catch')
+  simCatchData <- base::subset(inputDataFrame,year>=startYear & variable=='catch')
 
   # Keep only the columns MSSPM will need
   msspmColumns <- dplyr::select(simCatchData, year, Name, value)

@@ -52,7 +52,7 @@ convertKeyrunObsBMtoMSSPM <- function(speciesMappingDataFrame,observedBMDataFram
   # Q1. Why do I need the as.data.frame here?
 
   # Using the SVSPP-Name lookup data frame, replace the numeric SVSPP values with their modelName values
-  seasonDataColumns$SVSPP <- with(speciesMappingDataFrame, modelName[match(seasonDataColumns$SVSPP,SVSPP)])
+  seasonDataColumns$SVSPP <- base::with(speciesMappingDataFrame, modelName[match(seasonDataColumns$SVSPP,SVSPP)])
 
   # Rename the column header from SVSPP to Name
   names(seasonDataColumns)[names(seasonDataColumns) == "SVSPP"] <- "Name"
