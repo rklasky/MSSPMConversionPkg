@@ -31,7 +31,6 @@
 #' @param outputfile The output csv data file containing the MSSPM observed biomass formatted data
 #' @return n/a
 #' @examples
-#'
 #' remotes::install_github("NOAA-EDAB/ms-keyrun")
 #'
 #' speciesMappingDataFrame <- mskeyrun::focalSpecies # needed to map SVSPP value to modelName
@@ -58,7 +57,6 @@ convertKeyrunObsBMtoMSSPM <- function(speciesMappingDataFrame,observedBMDataFram
 
   # Create columns as species
   msspmObsBM <- tidyr::spread(seasonDataColumns, Name, value)
-  # Q2. There is missing data, what to do? (i.e., Fall, SVSPP=32, 1979)
 
   # Write out final table
   readr::write_csv(msspmObsBM,outputFile)
