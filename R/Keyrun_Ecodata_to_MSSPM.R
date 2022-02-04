@@ -15,20 +15,20 @@
 ## Example Usage ###############################################################
 # remotes::install_github("NOAA-EDAB/ecodata")
 #
-# names <- list("chloro_a","bottom_temp","sea_surface_temp")
+# colNames <- list("chloro_a","bottom_temp","sea_surface_temp")
 # inputDataFrames <- list(ecodata::chl_pp,ecodata::bottom_temp,ecodata::seasonal_oisst_anom))
 # region <- "GB"
 # vars <- list("ANNUAL_PPD_MEDIAN","bottom temp anomaly in situ","Spring OISST anomaly")
 # outputFile <- '/home/rklasky/test/Covariate_Keyrun.csv'
 #
-# convertEcodataToMSSPM(names,inputDataFrames,region,vars,outputFile)
+# convertEcodataToMSSPM(colNames,inputDataFrames,region,vars,outputFile)
 
 ## roxygen help ################################################################
-#' Keyrun to MSSPM Environmental Covariate Conversion
+#' Keyrun Ecodata to MSSPM Environmental Covariate Conversion
 #'
-#' Conversion of Keyrun (i.e., ecodata) Environmental Covariate data to an MSSPM Covariate csv file
-#' @param names The names of the covariate parameters that are used in MSSPM
-#' @param inputDataFrame The Keyrun input ecodata data frames
+#' Conversion of Keyrun (i.e., Ecodata) Environmental Covariate data to an MSSPM Covariate csv file
+#' @param colNames The names of the covariate parameters that are used in MSSPM
+#' @param inputDataFrame The input Ecodata data frames
 #' @param region The geographical region of interest (i.e., "GB","GOM","MAB")
 #' @param vars The description used in the data frame to specify the desired years' data
 #' @param outputfile The output csv data file containing the MSSPM Covariate
@@ -37,18 +37,18 @@
 #' @examples
 #' remotes::install_github("NOAA-EDAB/ecodata")
 #'
-#' names <- list("chloro_a","bottom_temp","sea_surface_temp")
+#' colNames <- list("chloro_a","bottom_temp","sea_surface_temp")
 #' inputDataFrames <- list(ecodata::chl_pp,ecodata::bottom_temp,ecodata::seasonal_oisst_anom)
 #' region <- "GB" # GB, GOM, or MAB (i.e., George's Bank, Gulf of Maine, Mid-Atlantic Bight)
 #' vars <- list("ANNUAL_PPD_MEDIAN","bottom temp anomaly in situ","Spring OISST anomaly")
 #' outputFile <- '/home/rklasky/test/Covariate_Keyrun.csv'
 #'
-#' convertEcodataToMSSPM(names,inputDataFrames,region,vars,outputFile)
+#' convertEcodataToMSSPM(colNames,inputDataFrames,region,vars,outputFile)
 #'
 
 #' @export
 #'
-convertEcodataToMSSPM <- function(colnames,inputDataFrames,region,vars,outputFile) {
+convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFile) {
   NO_DATA   <- -99999 # used when data are missing
   minYear   <-   9999 # used to find the minimum year of all of the ecodata data frames listed
   maxYear   <-      0 # used to find the maximum year of all of the ecodata data frames listed
@@ -63,7 +63,7 @@ convertEcodataToMSSPM <- function(colnames,inputDataFrames,region,vars,outputFil
   # For each ecodata data frame specified, find the max/min years and then copy the relevant
   # data from the ecodata data frame to the final merged data frame
   for (i in base::seq_along(inputDataFrames)) {
-    name <- names[[i+1]] # name of the environmental covariate (skip "year")
+    name <- colNames[[i+1]] # name of the environmental covariate (skip "year")
     inputDataFrame <- inputDataFrames[[i]] # the data frame containing the covariate data
     desc <- vars[[i]] # a descriptive field in each of the covariate data frames
 
@@ -82,7 +82,7 @@ convertEcodataToMSSPM <- function(colnames,inputDataFrames,region,vars,outputFil
 
   # Replace all NA values with NO_DATA values and set the column names
   mergedCovariateDataFrame[is.na(mergedCovariateDataFrame)] <- NO_DATA
-  base::colnames(mergedCovariateDataFrame) <- names
+  base::colnames(mergedCovariateDataFrame) <- colNames
 
   # Remove any superfluous before the first row with data or after the last row with data
   mergedCovariateDataFrame <- base::subset(mergedCovariateDataFrame,
