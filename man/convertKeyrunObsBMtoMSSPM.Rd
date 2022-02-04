@@ -18,7 +18,8 @@ convertKeyrunObsBMtoMSSPM(
 
 \item{surveySeason}{The survey season data to convert (valid options are currently FALL or SPRING)}
 
-\item{outputfile}{The output csv data file containing the MSSPM observed biomass formatted data}
+\item{outputfile}{The output csv data file containing the MSSPM observed biomass
+formatted data.  N.B. The csv file must begin with "Biomass".}
 }
 \value{
 n/a
@@ -27,7 +28,6 @@ n/a
 Conversion of Keyrun Survey Index file to MSSPM Observed Biomass csv file
 }
 \examples{
-
 remotes::install_github("NOAA-EDAB/ms-keyrun")
 
 speciesMappingDataFrame <- mskeyrun::focalSpecies # needed to map SVSPP value to modelName

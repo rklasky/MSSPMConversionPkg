@@ -11,7 +11,8 @@ convertKeyrunCatchtoMSSPM(inputDataFrame, startYear, outputFile)
 
 \item{startYear}{The year to start the conversion (earlier years will be skipped)}
 
-\item{outputfile}{The output csv data file containing the MSSPM catch formatted data}
+\item{outputfile}{The output csv data file containing the MSSPM catch
+formatted data. N.B. The csv file must begin with "HarvestCatch_".}
 }
 \value{
 n/a

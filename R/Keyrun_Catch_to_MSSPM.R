@@ -26,7 +26,8 @@
 #' Conversion of Keyrun (i.e., Atlantis) Simulated Catch Index file to MSSPM Catch csv file
 #' @param inputDataFrame The Keyrun input simulated catch data frame
 #' @param startYear The year to start the conversion (earlier years will be skipped)
-#' @param outputfile The output csv data file containing the MSSPM catch formatted data
+#' @param outputfile The output csv data file containing the MSSPM catch
+#' formatted data. N.B. The csv file must begin with "HarvestCatch_".
 #' @return n/a
 #' @examples
 #' remotes::install_github("NOAA-EDAB/ms-keyrun")

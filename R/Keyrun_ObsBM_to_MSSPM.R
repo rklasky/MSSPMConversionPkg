@@ -28,7 +28,8 @@
 #' @param speciesMappingDataFrame The data frame that contains a mapping of the SVSPP numeric values to corresponding species names (i.e., modelName)
 #' @param observedBMDataFrame The input survey index (i.e. biomass) data frame
 #' @param surveySeason The survey season data to convert (valid options are currently FALL or SPRING)
-#' @param outputfile The output csv data file containing the MSSPM observed biomass formatted data
+#' @param outputfile The output csv data file containing the MSSPM observed biomass
+#' formatted data.  N.B. The csv file must begin with "Biomass".
 #' @return n/a
 #' @examples
 #' remotes::install_github("NOAA-EDAB/ms-keyrun")
