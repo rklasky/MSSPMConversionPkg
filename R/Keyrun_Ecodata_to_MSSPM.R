@@ -63,7 +63,7 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
   # For each ecodata data frame specified, find the max/min years and then copy the relevant
   # data from the ecodata data frame to the final merged data frame
   for (i in base::seq_along(inputDataFrames)) {
-    name <- colNames[[i+1]] # name of the environmental covariate (skip "year")
+    name <- colNames[[i+1]] # the name of the environmental covariate (skip "year")
     inputDataFrame <- inputDataFrames[[i]] # the data frame containing the covariate data
     desc <- vars[[i]] # a descriptive field in each of the covariate data frames
 
@@ -84,7 +84,7 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
   mergedCovariateDataFrame[is.na(mergedCovariateDataFrame)] <- NO_DATA
   base::colnames(mergedCovariateDataFrame) <- colNames
 
-  # Remove any superfluous before the first row with data or after the last row with data
+  # Remove any superfluous rows before the first row with data or after the last row with data
   mergedCovariateDataFrame <- base::subset(mergedCovariateDataFrame,
         mergedCovariateDataFrame$year >= minYear & mergedCovariateDataFrame$year <= maxYear)
 
@@ -96,10 +96,10 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
 
 extractTimeValueData <- function(inputDataFrame,region,desc) {
 
-  # Subset the table with the required region and descr values
+  # Subset the table with the required region and description values
   ecoData <- base::subset(inputDataFrame, EPU==region & Var==desc)
 
-  # Remove any non-numeric characters from Time column (some data frames have a non-numeric prefix)
+  # Remove any non-numeric characters from the Time column (some data frames have a non-numeric prefix)
   ecoData$Time[TRUE] <- base::gsub("[^0-9.-]","",ecoData$Time)
 
   # Keep only the columns MSSPM will need
@@ -112,6 +112,6 @@ extractTimeValueData <- function(inputDataFrame,region,desc) {
   timeValueDataFrame$year  <- as.integer(timeValueDataFrame$year)
   timeValueDataFrame$Value <- as.character(timeValueDataFrame$Value)
 
-  # Return the data frame with only time and value columns
+  # Return the data frame with the desired columns
   return(timeValueDataFrame)
 }
