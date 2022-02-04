@@ -1,5 +1,5 @@
 ## Description
-This package contains R scripts that convert Keyrun data to MSSPM data. The two functions convert either simulated catch data to an MSSPM-readable CSV file or survey index biomass data to an MSSPM-readable CSV file.
+This package contains R scripts that convert Keyrun data to MSSPM data. The two convertKeyrun functions convert either simulated catch data to an MSSPM-readable CSV file or survey index biomass data to an MSSPM-readable CSV file. The convertEcodata function converts Ecodata data to Covariate data written to a MSSPM-readable CSV file.
 
 ## Installation
 ``` r
