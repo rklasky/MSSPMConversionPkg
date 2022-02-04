@@ -89,9 +89,9 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
         mergedCovariateDataFrame$year >= minYear & mergedCovariateDataFrame$year <= maxYear)
 
   # Sort columns by name
-  mergedCovariateDataFrame <- mergedCovariateDataFrame[,base::order(colnames(mergedCovariateDataFrame))]
+  mergedCovariateDataFrame <- mergedCovariateDataFrame[,base::order(base::colnames(mergedCovariateDataFrame))]
 
-    # Move the "year" column to the 1st position
+  # Move the "year" column to the 1st position
   mergedCovariateDataFrame <- dplyr::select(mergedCovariateDataFrame,"year",everything())
 
   # Write out the data frame as a csv file
