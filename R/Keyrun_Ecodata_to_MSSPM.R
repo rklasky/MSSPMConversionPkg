@@ -88,10 +88,16 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
   mergedCovariateDataFrame <- base::subset(mergedCovariateDataFrame,
         mergedCovariateDataFrame$year >= minYear & mergedCovariateDataFrame$year <= maxYear)
 
+  # Sort columns by name
+  mergedCovariateDataFrame <- mergedCovariateDataFrame[,base::order(colnames(mergedCovariateDataFrame))]
+
+    # Move the "year" column to the 1st position
+  mergedCovariateDataFrame <- dplyr::select(mergedCovariateDataFrame,"year",everything())
+
   # Write out the data frame as a csv file
   readr::write_csv(mergedCovariateDataFrame,outputFile)
 
-  # View(mergedCovariateDataFrame)
+  #View(mergedCovariateDataFrame)
 }
 
 extractTimeValueData <- function(inputDataFrame,region,desc) {
