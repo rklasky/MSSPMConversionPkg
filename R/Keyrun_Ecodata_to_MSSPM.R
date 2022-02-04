@@ -71,13 +71,15 @@ convertEcodataToMSSPM <- function(colNames,inputDataFrames,region,vars,outputFil
     timeValueDataFrame <- extractTimeValueData(inputDataFrame,region,desc)
 
     # Find the minimum and maximum of all years of all data frames
-    minYear <- as.integer(ifelse((base::min(timeValueDataFrame$year) < minYear),base::min(timeValueDataFrame$year),minYear))
-    maxYear <- as.integer(ifelse((base::max(timeValueDataFrame$year) > maxYear),base::max(timeValueDataFrame$year),maxYear))
+    dfMinYear <- base::min(timeValueDataFrame$year)
+    dfMaxYear <- base::max(timeValueDataFrame$year)
+    minYear   <- as.integer(ifelse((dfMinYear < minYear),dfMinYear,minYear))
+    maxYear   <- as.integer(ifelse((dfMaxYear > maxYear),dfMaxYear,maxYear))
 
     # Merge the recently extracted data frame into the merged data frame
     mergedCovariateDataFrame <- dplyr::left_join(mergedCovariateDataFrame,timeValueDataFrame,by="year")
 
-    print(base::paste0("Processing covariate: ",name," (",minYear," to ",maxYear,")"))
+    print(base::paste0("Processing covariate: ",name," (",dfMinYear," to ",dfMaxYear,", ",dfMaxYear-dfMinYear+1," year(s))"))
   }
 
   # Replace all NA values with NO_DATA values and set the column names
