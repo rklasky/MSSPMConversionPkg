@@ -108,7 +108,7 @@ extractTimeValueData <- function(inputDataFrame,region,desc) {
   ecoData <- base::subset(inputDataFrame, EPU==region & Var==desc)
 
   # Remove any non-numeric characters from the Time column (some data frames have a non-numeric prefix)
-  ecoData$Time[TRUE] <- base::gsub("[^0-9.-]","",ecoData$Time)
+  ecoData$Time <- base::gsub("[^0-9.-]","",ecoData$Time)
 
   # Keep only the columns MSSPM will need
   timeValueDataFrame <- dplyr::select(ecoData, Time, Value)
